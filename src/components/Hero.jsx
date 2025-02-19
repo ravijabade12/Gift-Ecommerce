@@ -1,8 +1,26 @@
 import React from "react";
 import { Gift, Package, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useGLTF, Stage, PresentationControls } from "@react-three/drei";
+import { useRef } from "react";
+import { Suspense } from "react";
 
 export default function Hero() {
+  function GiftModel(props) {
+    // Replace "/bmw.glb" with your 3D gift model path in the public folder
+    const { scene } = useGLTF("/gift.glb");
+    const modelRef = useRef();
+
+    return (
+      <primitive
+        ref={modelRef}
+        position={[0, 0, 0]}
+        object={scene}
+        {...props}
+      />
+    );
+  }
   return (
     <div className="relative bg-gradient-to-r from-pink-50 to-purple-50 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,13 +47,42 @@ export default function Hero() {
               </button>
             </div>
           </div>
-          <div className="relative">
-            <div className="aspect-square rounded-full bg-pink-200/30 absolute -top-8 -right-8 w-72 h-72 animate-pulse" />
-            <img
-              src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-              alt="Gift boxes"
-              className="relative rounded-lg shadow-2xl"
-            />
+          <div className="relative h-[500px]">
+            {" "}
+            {/* Adjust height as needed */}
+            <div className="relative w-full h-full">
+              <Suspense
+                fallback={
+                  <div className="w-full h-full flex items-center justify-center">
+                    Loading 3D Model...
+                  </div>
+                }
+              >
+                <Canvas
+                  dpr={[1, 2]}
+                  shadows
+                  camera={{ fov: 45, position: [0, 2, 5] }}
+                  style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "0.5rem", // rounded-lg
+                    boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)", // shadow-2xl
+                  }}
+                >
+                  <PresentationControls
+                    speed={1.5}
+                    global
+                    zoom={0.5}
+                    polar={[-0.1, Math.PI / 4]}
+                  >
+                    <Stage environment={"sunset"}>
+                      <GiftModel scale={0.1} />
+                    </Stage>
+                  </PresentationControls>
+                </Canvas>
+              </Suspense>
+            </div>
           </div>
         </div>
 
