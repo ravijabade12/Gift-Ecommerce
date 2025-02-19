@@ -108,6 +108,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## 📧 Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
+Your Name - [@ravijabade12](https://twitter.com/ravijabade12) - ravisjabade12@example.com
 
-Project Link: [https://github.com/yourusername/giftshop-ecommerce](https://github.com/yourusername/giftshop-ecommerce)
+Project Link: [https://giftcraft.netlify.app/](https://giftcraft.netlify.app/)
